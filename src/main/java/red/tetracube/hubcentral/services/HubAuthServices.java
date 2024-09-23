@@ -49,9 +49,9 @@ public class HubAuthServices {
         var token = Jwt
                 .claims()
                 .issuer(theHub.getSlug())
+                .issuedAt(tokenIssueTS)
                 .upn(theHub.getName())
                 .audience(jwtAudiences)
-                .issuedAt(tokenExpirationTS)
                 .expiresAt(tokenExpirationTS)
                 .sign();
         return Result.success(token);
