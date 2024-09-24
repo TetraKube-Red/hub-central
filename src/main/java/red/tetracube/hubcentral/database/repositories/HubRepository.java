@@ -6,22 +6,40 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceUnit;
 import jakarta.transaction.Transactional;
-import red.tetracube.hubcentral.database.entities.Hub;
+import red.tetracube.hubcentral.database.entities.HubEntity;
 
 @ApplicationScoped
 public class HubRepository {
 
     @Inject
-    @PersistenceUnit(unitName = "hubs")
     EntityManager em;
 
     @Transactional
-    public Optional<Hub> getHubByName(String name) {
+    public Optional<HubEntity> getHubByName(String name) {
         try {
-            var hub = em.<Hub>createQuery("name = :name", Hub.class)
+            var hub = em.<HubEntity>createQuery("""
+                    from HubEntity h
+                    where h.name = :name
+                    """,
+                    HubEntity.class)
                     .setParameter("name", name)
+                    .setMaxResults(1)
+                    .getSingleResult();
+            return Optional.ofNullable(hub);
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<HubEntity> getHubBySlug(String slug) {
+        try {
+            var hub = em.<HubEntity>createQuery("""
+                    from HubEntity h
+                    where h.slug = :slug
+                    """,
+                    HubEntity.class)
+                    .setParameter("slug", slug)
                     .setMaxResults(1)
                     .getSingleResult();
             return Optional.ofNullable(hub);

@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rooms")
-public class Room {
+public class RoomEntity {
     
     @Id
     private UUID id;
@@ -24,7 +24,15 @@ public class Room {
     private String name;
 
     @JoinColumn(name = "hub_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hub.class)
-    private Hub hub;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = HubEntity.class)
+    private HubEntity hub;
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }

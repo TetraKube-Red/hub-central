@@ -1,5 +1,6 @@
 package red.tetracube.hubcentral.database.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hubs")
-public class Hub {
+public class HubEntity {
 
     @Id
     private UUID id;
@@ -26,8 +27,8 @@ public class Hub {
     @Column(name = "access_code", nullable = false)
     private String accessCode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hub", orphanRemoval = true, targetEntity = Room.class)
-    private List<Room> rooms;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hub", orphanRemoval = true, targetEntity = RoomEntity.class)
+    private List<RoomEntity> rooms = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -45,7 +46,7 @@ public class Hub {
         return accessCode;
     }
 
-    public List<Room> getRooms() {
+    public List<RoomEntity> getRooms() {
         return rooms;
     }
     
