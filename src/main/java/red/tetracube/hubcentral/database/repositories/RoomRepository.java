@@ -1,15 +1,11 @@
 package red.tetracube.hubcentral.database.repositories;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.transaction.Transactional;
-import red.tetracube.hubcentral.database.entities.HubEntity;
 import red.tetracube.hubcentral.database.entities.RoomEntity;
 
 @ApplicationScoped

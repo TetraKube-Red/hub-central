@@ -5,10 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.quarkus.security.Authenticated;
-import io.quarkus.security.UnauthorizedException;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.InternalServerErrorException;
@@ -17,8 +15,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import red.tetracube.hubcentral.api.payloads.HubPayload;
-import red.tetracube.hubcentral.api.payloads.LoginPayload;
-import red.tetracube.hubcentral.database.entities.RoomEntity;
 import red.tetracube.hubcentral.exceptions.HubCentralException;
 import red.tetracube.hubcentral.services.HubServices;
 
